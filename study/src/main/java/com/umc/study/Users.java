@@ -1,6 +1,18 @@
+package com.umc.study;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Entity
 @Table(name = "user")
-public class User {
+public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
@@ -19,12 +31,12 @@ public class User {
 
     @Column(unique = true, nullable = false)
     private String userEmail;
-
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "users")
     private List<FavoriteFood> favoriteFoods;
-
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "users")
     private List<Review> reviews;
+    @OneToMany(mappedBy = "users")
+    private List<Mission> missions;
 
     // Getters, setters, and constructors
 }

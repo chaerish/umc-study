@@ -1,3 +1,16 @@
+package com.umc.study;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "store_category")
 public class StoreCategory {
@@ -12,5 +25,4 @@ public class StoreCategory {
     @OneToMany(mappedBy = "storeCategory", cascade = CascadeType.ALL)
     private List<Store> stores = new ArrayList<>();
 
-    // Getters, setters, and constructors
 }

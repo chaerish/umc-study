@@ -26,16 +26,16 @@ public class Member {
     private Long userId;
 
     @Column(length = 10, nullable = false)
-    private String userName;
+    private String name;
 
     @Column
-    private LocalDateTime userBirth;
+    private LocalDateTime birth;
 
     @Column
-    private String userAddress;
+    private String address;
 
     @Column
-    private Long userPoints;
+    private Long points;
 
     @Column(unique = true, nullable = false)
     private String userEmail;

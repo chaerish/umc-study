@@ -31,5 +31,7 @@ public class Mission {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
+    @ManyToOne(fetch =  FetchType.LAZY)
+    private Store store;
 
 }

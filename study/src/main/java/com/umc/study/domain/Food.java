@@ -1,4 +1,4 @@
-package com.umc.study;
+package com.umc.study.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

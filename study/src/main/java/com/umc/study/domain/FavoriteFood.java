@@ -1,4 +1,4 @@
-package com.umc.study;
+package com.umc.study.domain;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;

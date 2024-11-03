@@ -12,7 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "user")
-public class Users {
+public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
@@ -37,6 +37,4 @@ public class Users {
     private List<Review> reviews;
     @OneToMany(mappedBy = "users")
     private List<Mission> missions;
-
-    // Getters, setters, and constructors
 }

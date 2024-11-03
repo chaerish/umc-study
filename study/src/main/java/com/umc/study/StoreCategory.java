@@ -10,9 +10,12 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "store_category")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class StoreCategory {
 
     @Id

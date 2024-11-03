@@ -13,9 +13,12 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "store")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Store {
 
     @Id

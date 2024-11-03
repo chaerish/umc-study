@@ -8,10 +8,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "user")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,9 +36,9 @@ public class Member {
     @Column(unique = true, nullable = false)
     private String userEmail;
     @OneToMany(mappedBy = "users")
-    private List<FavoriteFood> favoriteFoods;
+    private List<FavoriteFood> favoriteFoods = new ArrayList<>();
     @OneToMany(mappedBy = "users")
-    private List<Review> reviews;
+    private List<Review> reviews = new ArrayList<>();
     @OneToMany(mappedBy = "users")
-    private List<Mission> missions;
+    private List<Mission> missions = new ArrayList<>();
 }

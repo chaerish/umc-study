@@ -33,6 +33,8 @@ public class Store {
 
     @Column
     private String storeImg;
+    @Column
+    private Float score;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_category_id", nullable = false)
@@ -40,4 +42,6 @@ public class Store {
 
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
     private List<Review> reviews = new ArrayList<>();
+    @OneToMany(mappedBy="store", cascade = CascadeType.ALL )
+    private List<Mission> missions = new ArrayList<>();
 }

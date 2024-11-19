@@ -1,48 +1,74 @@
 package com.umc.study.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import java.time.LocalDateTime;
+import com.umc.study.domain.common.BaseEntity;
+import com.umc.study.domain.enums.Gender;
+import com.umc.study.domain.enums.MemberStatus;
+import com.umc.study.domain.enums.SocialType;
+import com.umc.study.domain.mapping.MemberAgree;
+import com.umc.study.domain.mapping.MemberMission;
+import com.umc.study.domain.mapping.MemberPrefer;
+import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
+
+import jakarta.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "user")
+@Getter
+@DynamicUpdate
+@DynamicInsert
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member {
+@AllArgsConstructor
+public class Member extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long id;
 
-    @Column(length = 10, nullable = false)
+    @Column(nullable = false, length = 20)
     private String name;
 
-    @Column
-    private LocalDateTime birth;
-
-    @Column
+    @Column(nullable = false, length = 40)
     private String address;
 
-    @Column
-    private Long points;
+    @Column(nullable = false, length = 40)
+    private String specAddress;
 
-    @Column(unique = true, nullable = false)
-    private String userEmail;
-    @OneToMany(mappedBy = "users")
-    private List<FavoriteFood> favoriteFoods = new ArrayList<>();
-    @OneToMany(mappedBy = "users")
-    private List<Review> reviews = new ArrayList<>();
-    @OneToMany(mappedBy = "users")
-    private List<Mission> missions = new ArrayList<>();
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "VARCHAR(10)")
+    private Gender gender;
+
+    @Enumerated(EnumType.STRING)
+    private SocialType socialType;
+
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "VARCHAR(15) DEFAULT 'ACTIVE'")
+    private MemberStatus status;
+
+    private LocalDate inactiveDate;
+
+//    @Column(nullable = false, length = 50)
+    private String email;
+
+    @ColumnDefault("0")
+    private Integer point;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<MemberAgree> memberAgreeList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<MemberPrefer> memberPreferList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Review> reviewList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<MemberMission> memberMissionList = new ArrayList<>();
+
 }

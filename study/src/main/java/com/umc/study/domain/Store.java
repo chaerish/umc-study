@@ -1,47 +1,50 @@
 package com.umc.study.domain;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import com.umc.study.domain.common.BaseEntity;
+import lombok.*;
+
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "store")
+@Getter
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Store {
+@AllArgsConstructor
+public class Store extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long storeId;
+    private Long id;
 
-    @Column(length = 30, nullable = false)
-    private String storeName;
+    private String name;
 
-    @Column(nullable = false)
-    private String storeAddress;
+    private String address;
 
-    @Column
-    private String storeImg;
-    @Column
     private Float score;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "store_category_id", nullable = false)
-    private StoreCategory storeCategory;
+    @JoinColumn(name = "region_id")
+    private Region region;
 
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
-    private List<Review> reviews = new ArrayList<>();
-    @OneToMany(mappedBy="store", cascade = CascadeType.ALL )
-    private List<Mission> missions = new ArrayList<>();
+    private List<Mission> missionList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
+    private List<Review> reviewList = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Store{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", score=" + score +
+                ", region=" + (region != null ? region.getName() : "N/A") + // region의 이름 출력
+                '}';
+    }
+    public void addRegion(Region region){
+        this.region = region;
+    }
 }

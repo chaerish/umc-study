@@ -15,7 +15,7 @@ public class SwaggerConfig {
 
     @Bean
     public OpenAPI swagger() {
-        Info info = new Info().title("Umc 7th").description("Umc 7기 실습용 Swagger").version("0.0.1");
+        Info info = new Info().title("Umc 7th").description("Umc 7기 중앙 워크북 실습용 Swagger").version("0.0.1");
 
         String securityScheme = "JWT TOKEN";
         SecurityRequirement securityRequirement = new SecurityRequirement().addList(securityScheme);
